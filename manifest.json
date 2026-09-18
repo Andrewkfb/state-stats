@@ -1,0 +1,10 @@
+{
+	"id": "state-stats",
+	"name": "State Stats",
+	"version": "0.1.0",
+	"minAppVersion": "1.7.2",
+	"description": "What is in flight, what is late, what has gone quiet, and where the vault's conventions are quietly not being met.",
+	"author": "andrewkfb",
+	"authorUrl": "https://github.com/andrewkfb",
+	"isDesktopOnly": false
+}
