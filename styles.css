@@ -282,3 +282,53 @@
 }
 .ss-ptitle.ss-has-tip { border-bottom-color: var(--background-modifier-border-hover); }
 .ss-has-tip:hover { border-bottom-color: var(--text-accent); }
+
+/* ------------------------------------------------------------------- touch */
+/* Coarse pointers get 44px targets. The 16px search font is not a style
+   choice: iOS zooms the viewport when it focuses an input whose text is
+   smaller than that, and the zoom does not undo itself on blur. */
+@media (pointer: coarse) {
+	.ss-chip,
+	.ss-refresh {
+		min-height: 44px;
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
+
+	.ss-search {
+		min-height: 44px;
+		font-size: 16px;
+		/* Once the chips have wrapped, margin-left:auto strands the box
+		   beside the last chip. Give it the width of the row instead. */
+		margin-left: 0;
+		flex: 1 1 100%;
+	}
+
+	.ss-row { min-height: 44px; }
+
+	/* The anchor carries the click handler, not the row, so the anchor is
+	   what has to be 44px tall. Moving the row's vertical padding onto it
+	   grows the hit area to the full width of the row without changing the
+	   spacing anyone sees. Padding rather than a stretched ::after overlay:
+	   .ss-name is overflow:hidden for its ellipsis, which would clip one. */
+	.ss-row:not(.ss-gap) { padding-top: 0; padding-bottom: 0; }
+	.ss-row:not(.ss-gap) .ss-name {
+		/* border-box and an explicit floor, because the padding alone only
+		   reaches 44px at the line-height this theme happens to inherit. */
+		box-sizing: border-box;
+		min-height: 44px;
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	/* Gap rows hold several links side by side in a sentence, so no single
+	   one may fill the row. They get vertical padding on their own box. */
+	.ss-gap-link {
+		display: inline-block;
+		padding: 6px 2px;
+	}
+
+	/* There is no hover on touch: the help cursor never shows, and the dotted
+	   underline is the only remaining sign that an explanation exists. */
+	.ss-has-tip { cursor: default; }
+}
